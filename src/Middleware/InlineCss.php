@@ -2,6 +2,8 @@
 
 namespace RenatoMarinho\LaravelPageSpeed\Middleware;
 
+use Illuminate\Support\Str;
+
 class InlineCss extends PageSpeed
 {
     private $html = '';
@@ -22,7 +24,7 @@ class InlineCss extends PageSpeed
 
         $this->class = collect($matches[1])->mapWithKeys(function ($item) {
 
-            return [rand() => $item[0] ];
+            return [Str::random(6) => $item[0] ];
         })->unique();
 
         return $this->injectStyle()->injectClass()->fixHTML()->html;
